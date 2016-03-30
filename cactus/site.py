@@ -10,6 +10,7 @@ import django.conf
 
 from cactus import ui as ui_module
 from cactus.config.router import ConfigRouter
+from cactus.config.context import ConfigContext
 from cactus.deployment import get_deployment_engine_class
 from cactus.i18n.commands import MessageMaker, MessageCompiler
 from cactus.plugin.builtin.cache import CacheDurationPlugin
@@ -182,6 +183,7 @@ class Site(SiteCompatibilityLayer):
                 'static': [p for p in self.static()]
             },
             '__CACTUS_SITE__': self,
+            'config': ConfigContext(self.config),
         }
 
         # Also make lowercase work
